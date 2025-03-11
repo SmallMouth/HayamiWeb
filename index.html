@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雪峰滑雪用具租賃 - 專業滑雪裝備租賃服務</title>
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #f0f5ff;
+            --accent-color: #e63946;
+            --text-color: #333;
+            --light-text: #666;
+            --lighter-text: #999;
+            --white: #fff;
+            --light-gray: #f5f5f5;
+            --border-color: #ddd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 25px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/api/placeholder/1200/600');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0d5bbc;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--white);
+            margin-left: 15px;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--light-text);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .equipment-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .equipment-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .equipment-img {
+            height: 200px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .equipment-info {
+            padding: 20px;
+        }
+
+        .equipment-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .equipment-info p {
+            color: var(--light-text);
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .price span {
+            font-size: 0.9rem;
+            font-weight: normal;
+            color: var(--lighter-text);
+        }
+
+        .how-it-works {
+            background-color: var(--secondary-color);
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 20px;
+            margin: 15px;
+        }
+
+        .step-icon {
+            background-color: var(--primary-color);
+            color: var(--white);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+        }
+
+        .step h3 {
+            margin-bottom: 15px;
+        }
+
+        .checkout-section {
+            background-color: var(--light-gray);
+        }
+
+        .checkout-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .checkout-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .checkout-summary {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .checkout-btn {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .summary-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .summary-total {
+            font-weight: bold;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+            font-size: 1.1rem;
+        }
+
+        .contact-section {
+            background-color: var(--white);
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            margin-right: 15px;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .about-section {
+            background-color: var(--light-gray);
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            overflow: hidden;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .terms-section {
+            background-color: var(--white);
+        }
+
+        .terms-content {
+            background-color: var(--light-gray);
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .terms-content h3 {
+            margin: 25px 0 15px;
+        }
+
+        .terms-content p {
+            margin-bottom: 15px;
+        }
+
+        .terms-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background-color: #333;
+            color: var(--white);
+            padding: 40px 0;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-logo {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-logo a {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .footer-links {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-links h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: -10px;
+            left: 0;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 50px 0;
+            }
+
+            .btn {
+                padding: 10px 20px;
+            }
+
+            .step {
+                flex: 100%;
+                min-width: none;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">雪峰滑雪租賃</a>
+            <ul class="nav-menu">
+                <li><a href="#equipment">租賃裝備</a></li>
+                <li><a href="#how-it-works">租賃流程</a></li>
+                <li><a href="#checkout">立即預訂</a></li>
+                <li><a href="#contact">聯繫我們</a></li>
+                <li><a href="#about">關於我們</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>專業滑雪裝備租賃服務</h1>
+            <p>為您提供高品質滑雪用具，讓您的雪季更加精彩！無論您是初學者還是專業滑雪愛好者，我們都能滿足您的需求。</p>
+            <a href="#equipment" class="btn">瀏覽裝備</a>
+            <a href="#checkout" class="btn btn-secondary">立即預訂</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <a href="#">雪峰滑雪租賃</a>
+                    <p style="margin-top: 20px;">提供高品質滑雪裝備租賃服務，讓您的滑雪之旅更加精彩。</p>
+                </div>
+
+                <div class="footer-links">
+                    <h3>快速鏈接</h3>
+                    <ul>
+                        <li><a href="#equipment">租賃裝備</a></li>
+                        <li><a href="#how-it-works">租賃流程</a></li>
+                        <li><a href="#checkout">立即預訂</a></li>
+                        <li><a href="#contact">聯繫我們</a></li>
+                        <li><a href="#about">關於我們</a></li>
+                        <li><a href="#terms">租賃條款</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h3>聯繫方式</h3>
+                    <ul>
+                        <li><a href="tel:+88621234567">+886 2 XXXX XXXX</a></li>
+                        <li><a href="mailto:contact@xuefen-ski.com">contact@xuefen-ski.com</a></li>
+                        <li>台灣台北市信義區松智路X號</li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h3>營業時間</h3>
+                    <ul>
+                        <li>週一至週五: 9:00 - 18:00</li>
+                        <li>週六至週日: 10:00 - 17:00</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 雪峰滑雪用具租賃有限公司. 版權所有.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 簡單的結賬計算功能
+        document.addEventListener('DOMContentLoaded', function () {
+            const equipmentSelect = document.getElementById('equipment');
+            const pickupDateInput = document.getElementById('pickup-date');
+            const returnDateInput = document.getElementById('return-date');
+
+            const updateSummary = function () {
+                let equipmentPrice = 0;
+                const equipment = equipmentSelect.value;
+
+                // 根據選擇的裝備設置價格
+                if (equipment === 'adult-set') equipmentPrice = 1200;
+                else if (equipment === 'child-set') equipmentPrice = 800;
+                else if (equipment === 'pro-ski') equipmentPrice = 1500;
+                else if (equipment === 'ski-clothes') equipmentPrice = 600;
+                else if (equipment === 'helmet-goggles') equipmentPrice = 300;
+                else if (equipment === 'snow-boots') equipmentPrice = 250;
+
+                // 計算租賃天數
+                let days = 0;
+                if (pickupDateInput.value && returnDateInput.value) {
+                    const pickupDate = new Date(pickupDateInput.value);
+                    const returnDate = new Date(returnDateInput.value);
+
+                    // 計算天數差異
+                    const timeDiff = returnDate - pickupDate;
+                    days = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                    // 如果日期無效，設為0
+                    if (days < 0) days = 0;
+                }
+
+                // 計算總價
+                const equipmentTotal = equipmentPrice * days;
+                const insuranceFee = days > 0 ? 200 : 0;
+                const total = equipmentTotal + insuranceFee;
+
+                // 更新摘要顯示
+                document.querySelector('.summary-item:nth-child(1) span:last-child').textContent = `NT${equipmentPrice}`;
+                document.querySelector('.summary-item:nth-child(2) span:last-child').textContent = `${days} 天`;
+                document.querySelector('.summary-item:nth-child(3) span:last-child').textContent = `NT${insuranceFee}`;
+                document.querySelector('.summary-total span:last-child').textContent = `NT${total}`;
+            };
+
+            // 添加事件監聽器
+            equipmentSelect.addEventListener('change', updateSummary);
+            pickupDateInput.addEventListener('change', updateSummary);
+            returnDateInput.addEventListener('change', updateSummary);
+        });
+    </script>
+</body>
+
+</html>
+
+<section id="equipment" class="section">
+    <div class="container">
+        <div class="section-title">
+            <h2>滑雪裝備租賃</h2>
+            <p>我們提供各類高品質滑雪裝備，包括滑雪板、滑雪杖、滑雪靴、頭盔等全套裝備，滿足不同滑雪愛好者的需求。</p>
+        </div>
+
+        <div class="equipment-grid">
+            <div class="equipment-card">
+                <div class="equipment-img">
+                    <img src="/api/placeholder/300/200" alt="成人滑雪套裝">
+                </div>
+                <div class="equipment-info">
+                    <h3>成人滑雪套裝</h3>
+                    <p>包含滑雪板、固定器、滑雪靴及滑雪杖，適合各級別滑雪愛好者。</p>
+                    <div class="price">NT$1,200 <span>/ 天</span></div>
+                    <a href="#checkout" class="btn">預訂此裝備</a>
+                </div>
+            </div>
+
+            <div class="equipment-card">
+                <div class="equipment-img">
+                    <img src="/api/placeholder/300/200" alt="兒童滑雪套裝">
+                </div>
+                <div class="equipment-info">
+                    <h3>兒童滑雪套裝</h3>
+                    <p>專為兒童設計的滑雪裝備，確保安全舒適的滑雪體驗。</p>
+                    <div class="price">NT$800 <span>/ 天</span></div>
+                    <a href="#checkout" class="btn">預訂此裝備</a>
+                </div>
+            </div>
+
+            <div class="equipment-card">
+                <div class="equipment-img">
+                    <img src="/api/placeholder/300/200" alt="高級滑雪板">
+                </div>
+                <div class="equipment-info">
+                    <h3>高級滑雪板</h3>
+                    <p>專業級滑雪板，適合有經驗的滑雪愛好者，提供極佳的操控性和穩定性。</p>
+                    <div class="price">NT$1,500 <span>/ 天</span></div>
+                    <a href="#checkout" class="btn">預訂此裝備</a>
+                </div>
+            </div>
+
+            <div class="equipment-card">
+                <div class="equipment-img">
+                    <img src="/api/placeholder/300/200" alt="滑雪服套裝">
+                </div>
+                <div class="equipment-info">
+                    <h3>滑雪服套裝</h3>
+                    <p>保暖防水的滑雪服套裝，包含滑雪夾克和滑雪褲。</p>
+                    <div class="price">NT$600 <span>/ 天</span></div>
+                    <a href="#checkout" class="btn">預訂此裝備</a>
+                </div>
+            </div>
+
+            <div class="equipment-card">
+                <div class="equipment-img">
+                    <img src="/api/placeholder/300/200" alt="滑雪頭盔與護目鏡">
+                </div>
+                <div class="equipment-info">
+                    <h3>滑雪頭盔與護目鏡</h3>
+                    <p>安全防護裝備，確保您在滑雪時的安全。</p>
+                    <div class="price">NT$300 <span>/ 天</span></div>
+                    <a href="#checkout" class="btn">預訂此裝備</a>
+                </div>
+            </div>
+
+            <div class="equipment-card">
+                <div class="equipment-img">
+                    <img src="/api/placeholder/300/200" alt="雪地靴">
+                </div>
+                <div class="equipment-info">
+                    <h3>雪地靴</h3>
+                    <p>舒適保暖的雪地靴，適合在雪地中行走。</p>
+                    <div class="price">NT$250 <span>/ 天</span></div>
+                    <a href="#checkout" class="btn">預訂此裝備</a>
+                </div>
+            </div>
+
+            <div class="about-image">
+                <img src="/api/placeholder/400/300" alt="我們的團隊">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="terms" class="section terms-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>租賃條款與條件</h2>
+            <p>請在預訂前仔細閱讀以下條款與條件。</p>
+        </div>
+
+        <div class="terms-content">
+            <h3>租賃條件</h3>
+            <p>租賃我們的滑雪裝備，即表示您同意以下條款與條件：</p>
+            <ul>
+                <li>租借者必須年滿18歲，未滿18歲者需由監護人陪同並簽署同意書。</li>
+                <li>租借時需提供有效身份證件和信用卡作為押金擔保。</li>
+                <li>租借期間，租借者對裝備的安全和損壞負責。</li>
+                <li>裝備必須在約定日期前歸還，逾期將收取額外費用。</li>
+            </ul>
+
+            <h3>取消政策</h3>
+            <p>我們的取消政策如下：</p>
+            <ul>
+                <li>租賃日期前7天以上取消，全額退款。</li>
+                <li>租賃日期前3-7天取消，退款80%。</li>
+                <li>租賃日期前1-3天取消，退款50%。</li>
+                <li>租賃當天取消，不予退款。</li>
+            </ul>
+
+            <h3>損壞賠償</h3>
+            <p>如裝備在租賃期間發生損壞：</p>
+            <ul>
+                <li>輕微損壞（不影響使用）：收取修理費用。</li>
+                <li>嚴重損壞（無法修復）：收取裝備全部或部分更換費用。</li>
+                <li>遺失裝備：收取裝備全部更換費用。</li>
+            </ul>
+
+            <h3>免責聲明</h3>
+            <p>滑雪是一項高風險運動，租借者應充分了解其中風險並自行承擔責任。我們不對租借者在使用我們裝備過程中發生的任何意外或傷害負責。我們建議租借者：</p>
+            <ul>
+                <li>根據自身能力選擇合適的滑雪道。</li>
+                <li>遵守滑雪場的各項規定。</li>
+                <li>購買相關保險。</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="how-it-works" class="section how-it-works">
+    <div class="container">
+        <div class="section-title">
+            <h2>租賃流程</h2>
+            <p>我們的租賃流程簡單快捷，讓您輕鬆獲得所需的滑雪裝備。</p>
+        </div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-icon">1</div>
+                <h3>選擇裝備</h3>
+                <p>瀏覽我們的裝備目錄，選擇您需要的滑雪裝備。</p>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">2</div>
+                <h3>預訂日期</h3>
+                <p>選擇您需要使用裝備的日期和租賃時長。</p>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">3</div>
+                <h3>在線支付</h3>
+                <p>使用信用卡或其他支付方式完成預訂支付。</p>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">4</div>
+                <h3>取還裝備</h3>
+                <p>在約定時間到我們的門店取裝備，使用後歸還。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="checkout" class="section checkout-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>立即預訂</h2>
+            <p>填寫以下表格完成您的裝備預訂。</p>
+        </div>
+
+        <div class="checkout-container">
+            <div class="checkout-form">
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" id="name" name="name" placeholder="請輸入您的姓名">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">電子郵件</label>
+                    <input type="email" id="email" name="email" placeholder="請輸入您的電子郵件">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">電話號碼</label>
+                    <input type="tel" id="phone" name="phone" placeholder="請輸入您的電話號碼">
+                </div>
+
+                <div class="form-group">
+                    <label for="equipment">選擇裝備</label>
+                    <select id="equipment" name="equipment">
+                        <option value="">-- 請選擇裝備 --</option>
+                        <option value="adult-set">成人滑雪套裝</option>
+                        <option value="child-set">兒童滑雪套裝</option>
+                        <option value="pro-ski">高級滑雪板</option>
+                        <option value="ski-clothes">滑雪服套裝</option>
+                        <option value="helmet-goggles">滑雪頭盔與護目鏡</option>
+                        <option value="snow-boots">雪地靴</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pickup-date">取裝備日期</label>
+                    <input type="date" id="pickup-date" name="pickup-date">
+                </div>
+
+                <div class="form-group">
+                    <label for="return-date">還裝備日期</label>
+                    <input type="date" id="return-date" name="return-date">
+                </div>
+
+                <div class="form-group">
+                    <label for="additional-info">其他需求</label>
+                    <textarea id="additional-info" name="additional-info" rows="4"
+                        placeholder="如有其他需求，請在此說明"></textarea>
+                </div>
+
+                <button type="submit" class="btn checkout-btn">確認預訂</button>
+            </div>
+
+            <div class="checkout-summary">
+                <h3 class="summary-title">訂單摘要</h3>
+
+                <div class="summary-item">
+                    <span>裝備租賃費</span>
+                    <span>NT$0</span>
+                </div>
+
+                <div class="summary-item">
+                    <span>租賃天數</span>
+                    <span>0 天</span>
+                </div>
+
+                <div class="summary-item">
+                    <span>保險費</span>
+                    <span>NT$0</span>
+                </div>
+
+                <div class="summary-total">
+                    <span>合計</span>
+                    <span>NT$0</span>
+                </div>
+
+                <p style="margin-top: 20px; font-size: 0.9rem;">* 價格將根據您選擇的裝備和租賃天數自動計算</p>
+                <p style="font-size: 0.9rem;">* 取裝備時需支付可退還押金</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="section contact-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>聯繫我們</h2>
+            <p>如有任何問題或需求，請隨時與我們聯繫。</p>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-form">
+                <div class="form-group">
+                    <label for="contact-name">姓名</label>
+                    <input type="text" id="contact-name" name="contact-name" placeholder="請輸入您的姓名">
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-email">電子郵件</label>
+                    <input type="email" id="contact-email" name="contact-email" placeholder="請輸入您的電子郵件">
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-subject">主題</label>
+                    <input type="text" id="contact-subject" name="contact-subject" placeholder="請輸入主題">
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-message">訊息</label>
+                    <textarea id="contact-message" name="contact-message" rows="5" placeholder="請輸入您的訊息"></textarea>
+                </div>
+
+                <button type="submit" class="btn">發送訊息</button>
+            </div>
+
+            <div class="contact-info">
+                <h3>聯繫方式</h3>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h4>地址</h4>
+                        <p>台灣台北市信義區松智路X號</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <h4>電話</h4>
+                        <p>+886 2 XXXX XXXX</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <h4>電子郵件</h4>
+                        <p>contact@xuefen-ski.com</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">🕒</div>
+                    <div>
+                        <h4>營業時間</h4>
+                        <p>週一至週日: 09:00 - 18:00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="section about-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>關於我們</h2>
+            <p>雪峰滑雪用具租賃，專業滑雪裝備提供商。</p>
+        </div>
+
+        <div class="about-content">
+            <div class="about-text">
+                <h3>我們的使命</h3>
+                <p>雪峰滑雪用具租賃成立於2010年，致力於為滑雪愛好者提供高品質的滑雪裝備租賃服務。我們的使命是讓更多人能夠輕鬆體驗滑雪的樂趣，無需投入大量資金購買昂貴的滑雪裝備。</p>
+
+                <h3>我們的優勢</h3>
+                <p>作為專業的滑雪用具租賃服務提供商，我們擁有以下優勢：</p>
+                <ul>
+                    <li>豐富的裝備選擇，滿足不同滑雪者的需求</li>
+                    <li>定期維護和更新裝備，確保安全和性能</li>
+                    <li>專業的團隊提供個性化的裝備推薦和調整</li>
+                    <li>便捷的預訂系統和靈活的租賃方案</li>
+                    <li>合理的價格和透明的費用政策</li>
+                </ul>
+
+                <h3>我們的願景</h3>
+                <p>我們期望成為台灣最專業、最受信賴的滑雪裝備租賃服務提供商，讓更多台灣民眾能夠輕鬆享受滑雪的樂趣。未來，我們也計劃擴展業務至亞洲其他地區，為更多滑雪愛好者提供服務。</p>
